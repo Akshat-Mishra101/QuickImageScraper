@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OpenScraper.SecondaryController">
+   <children>
+      <Text layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scraper Settings">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="31.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proxy Configuration">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Separator layoutX="297.0" layoutY="56.0" orientation="VERTICAL" prefHeight="353.0" prefWidth="8.0" />
+      <Separator layoutY="56.0" prefHeight="3.0" prefWidth="300.0" />
+      <TextField fx:id="proxy" layoutX="31.0" layoutY="125.0" promptText="Proxy String Appendage" />
+      <MFXCheckbox fx:id="url_encoding" layoutX="31.0" layoutY="168.0" text="Encode URL" />
+      <Text layoutX="31.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timeout">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Spinner fx:id="Downloading_timer" layoutX="32.0" layoutY="293.0" prefHeight="26.0" prefWidth="114.0" />
+      <Text layoutX="109.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="in ms">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Text>
+      <Separator layoutY="397.0" prefHeight="3.0" prefWidth="300.0" />
+      <MFXButton buttonType="RAISED" layoutX="681.0" layoutY="421.0" onAction="#apply_properties" prefHeight="26.0" prefWidth="71.0" text="Apply" />
+      <MFXButton buttonType="RAISED" layoutX="546.0" layoutY="421.0" onAction="#reset_defaults" prefHeight="26.0" prefWidth="114.0" text="Reset Defaults" />
+      <Text layoutX="320.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Multithreading">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <MFXToggleButton fx:id="Threading" layoutX="479.0" layoutY="68.0" onAction="#threading_switch" prefHeight="48.0" prefWidth="120.0" text="Disabled" toggleColor="#a4a4a4" toggleLineColor="#55e163" />
+      <MFXComboBox fx:id="total_threads" layoutX="324.0" layoutY="124.0" promptText="Total Threads" />
+      <Separator layoutX="300.0" layoutY="168.0" prefHeight="3.0" prefWidth="478.0" />
+      <Text layoutX="324.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Naming Policy" wrappingWidth="183.25250244140625">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <MFXCheckbox fx:id="save_images_in_different_folders" layoutX="331.0" layoutY="251.0" text="Save Images In Different Folders" />
+      <MFXCheckbox fx:id="append_random_strings" layoutX="331.0" layoutY="217.0" prefHeight="31.0" prefWidth="258.0" text="Append Random Code Before Each String" />
+      <MFXCheckbox fx:id="save_image_data" layoutX="21.0" layoutY="418.0" text="Save Image Data In A CSV File" />
+      <Text layoutX="31.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Downloader Timeout">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="30.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Link Scraper Timeout">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutY="206.0" prefHeight="3.0" prefWidth="300.0" />
+      <Spinner fx:id="scraping_timer" layoutX="32.0" layoutY="356.0" prefHeight="26.0" prefWidth="114.0" />
+      <Separator layoutX="300.0" layoutY="291.0" prefHeight="3.0" prefWidth="478.0" />
+      <Separator layoutX="300.0" layoutY="408.0" prefHeight="3.0" prefWidth="478.0" />
+      <Text layoutX="312.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retry Policy" wrappingWidth="183.25250244140625">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Spinner fx:id="scraper_retries" layoutX="312.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
+      <Spinner fx:id="downloader_retries" layoutX="537.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
+      <Text layoutX="312.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scraper Retries" wrappingWidth="92.85247802734375">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="536.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Downloader Retries" wrappingWidth="116.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Separator layoutX="300.0" layoutY="57.0" prefHeight="3.0" prefWidth="477.0" />
+   </children>
+</AnchorPane>
