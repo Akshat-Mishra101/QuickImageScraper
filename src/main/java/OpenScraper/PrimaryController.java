@@ -24,6 +24,8 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 public class PrimaryController {
     @FXML
+    Label line_number;
+    @FXML
     ProgressBar pb;
     @FXML
     ListView lv;
@@ -34,7 +36,11 @@ public class PrimaryController {
      * Load The file Containing the Set
      * of Links to be scraped as Images
      */
-
+    @FXML
+    public void updateLineNumber()
+    {
+        line_number.setText("Line :"+lv.getFocusModel().getFocusedIndex());
+    }
     @FXML
     public void OpenFile()throws Exception
     {   //delete last Temporary File
@@ -142,6 +148,6 @@ public class PrimaryController {
     private void documentation()throws Exception
     {
 
-        Desktop.getDesktop().browse(URI.create("https://www.google.com"));
+        Desktop.getDesktop().browse(URI.create("https://github.com/Akshat-Mishra101/QuickImageScraper"));
     }
 }

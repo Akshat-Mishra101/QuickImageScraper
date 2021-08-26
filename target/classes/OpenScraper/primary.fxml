@@ -33,11 +33,11 @@
         </menus>
       </MenuBar>
       <MFXProgressBar fx:id="pb" layoutY="29.0" prefHeight="4.0" prefWidth="600.0" progress="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
-      <ListView fx:id="lv" layoutY="91.0" prefHeight="318.0" prefWidth="600.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
+      <ListView fx:id="lv" layoutY="91.0" onMouseClicked="#updateLineNumber" prefHeight="318.0" prefWidth="600.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
       <Label fx:id="info_label" layoutX="5.0" layoutY="33.0" prefHeight="18.0" prefWidth="583.0" text="Welcome To The Quick Image Scraper" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="33.0" />
       <MFXButton layoutX="447.0" layoutY="2.0" onAction="#start" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f0f0f0;" text="Start" AnchorPane.rightAnchor="78.6" AnchorPane.topAnchor="2.0" />
       <MFXButton layoutX="522.0" layoutY="2.0" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f0f0f0;" text="Restart" AnchorPane.rightAnchor="3.5999999999999943" AnchorPane.topAnchor="2.0" />
-      <Label layoutX="5.0" layoutY="409.0" prefHeight="18.0" prefWidth="583.0" text="Line Number" AnchorPane.bottomAnchor="4.600000000000001" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="11.799999999999955" />
+      <Label fx:id="line_number" layoutX="5.0" layoutY="409.0" prefHeight="18.0" prefWidth="583.0" text="Line Number" AnchorPane.bottomAnchor="4.600000000000001" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="11.799999999999955" />
       <MFXToggleButton layoutX="494.0" layoutY="42.0" text="Pause" AnchorPane.rightAnchor="4.400000000000006" AnchorPane.topAnchor="42.0" />
    </children>
 </AnchorPane>
