@@ -15,7 +15,13 @@ public class Starter {
 
         //Properties Module has Been Tested
        //File Importing Module Works Perfectly(though it's a bit slow and might require a speed upgrade in the near future)
-        //Work And Complete And Test The Downloader Engine Today
+        //Downloader Engine Works in Serial Mode
+        //Secondary Controller is Ready
+
+        //Work On Multi-Threading Today
+        //Work on packaging and Deployment Tomorrow
+
+
 
 
         //MultiThread This App Tomorrow

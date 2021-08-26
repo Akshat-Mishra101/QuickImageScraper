@@ -120,7 +120,9 @@ public class SerialDownloader
     }
 
     private static String getAName(String link) {
+
         String greatest_slug=link.substring(link.lastIndexOf("/")+1);
-        return (greatest_slug.length()>0?greatest_slug:randomAlphabetic(10).toUpperCase());
+        String appended_string=Properties.get("names").equals("YES")?randomAlphabetic(10).toUpperCase():"";//Appends Random Code When The Option Is Enabled
+        return appended_string+(greatest_slug.length()>0?greatest_slug:randomAlphabetic(10).toUpperCase());
     }
 }

@@ -31,11 +31,17 @@ public class Downloader extends Task<Void> {
     @Override
     protected Void call() throws Exception {
         System.out.println("here too");
-        FileWriter fw=new FileWriter("LinksAndAlts.csv");//The Data Is Saved In A CSV File
-        fw.close();
-        Files.write(Paths.get("LinksAndAlts.csv"), ("Page-Link,SRC,Data-SRC,Title,Image-Alt,Width,Height"+"\r\n").getBytes(), StandardOpenOption.APPEND);
+        if(Properties.get("save").equals("YES")) {
+            //If The Data Saving Property Is Enabled, We create The File
+            FileWriter fw = new FileWriter("LinksAndAlts.csv");//The Data Is Saved In A CSV File
+            fw.close();
+            Files.write(Paths.get("LinksAndAlts.csv"), ("Page-Link,SRC,Data-SRC,Title,Image-Alt,Width,Height"+"\r\n").getBytes(), StandardOpenOption.APPEND);
+
+        }
+
         DownloaderEngine de=new DownloaderEngine("Images/",6);
         Scanner sc=new Scanner(new File(path));//Loads The File
+
         int current_link_number=0;
         while(sc.hasNext())
         {
@@ -49,6 +55,7 @@ public class Downloader extends Task<Void> {
 
             String finallink=Properties.get("proxy")+(Properties.get("encode").equals("NO")?link: URLEncoder.encode(link, StandardCharsets.UTF_8));
             System.out.println(finallink+" is this");
+
             Document doc= Jsoup.connect(Properties.get("proxy")+(Properties.get("encode").equals("NO")?link: URLEncoder.encode(link, StandardCharsets.UTF_8))).timeout(Integer.parseInt(Properties.get("timeout"))).get();//Attempt To Scrape The Article
             System.out.println("NOT HERE");
             Elements images=doc.getElementsByTag("img");
@@ -68,8 +75,9 @@ public class Downloader extends Task<Void> {
                  String width=image.attr("width").trim().length()>0?image.attr("width").trim():"N/A";
                  String height=image.attr("height").trim().length()>0?image.attr("height").trim():"N/A";
 
-                System.out.println("FOR EACH IMAGE "+image);
+              System.out.println(image);
                  //The line below Adds To Our CSV File
+                if(Properties.get("save").equals("YES"))//Saves If The Property Is Enabled
                 Files.write(Paths.get("LinksAndAlts.csv"), (link+","+src+","+data_src+","+title+","+alt+","+width+","+height+"\r\n").getBytes(), StandardOpenOption.APPEND);
 
                 if(Properties.get("image_saving").equals("YES"))
@@ -81,6 +89,8 @@ public class Downloader extends Task<Void> {
                     //download the image serially and save it
                     String result=SerialDownloader.SecureDownload(src,lv);
                     System.out.println("The result is "+result);
+
+
                     Platform.runLater(()->{  //updates the ListView UI
 
                         lv.getItems().add(src+(result.equals("S")?" Downloaded":" Could Not Download"));

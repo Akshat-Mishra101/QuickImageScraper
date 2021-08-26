@@ -124,7 +124,7 @@ public class PrimaryController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
         stage.setResizable(false);
-        //stage.getIcons().add(new Image("Images/qis.png"));
+        stage.getIcons().add(new Image("file:///C:/Users/joey/Images/QuickImageScraper.png"));
 
     }
 

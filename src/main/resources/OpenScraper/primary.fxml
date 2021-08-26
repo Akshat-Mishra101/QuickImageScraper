@@ -38,6 +38,6 @@
       <MFXButton layoutX="447.0" layoutY="2.0" onAction="#start" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f0f0f0;" text="Start" AnchorPane.rightAnchor="78.6" AnchorPane.topAnchor="2.0" />
       <MFXButton layoutX="522.0" layoutY="2.0" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f0f0f0;" text="Restart" AnchorPane.rightAnchor="3.5999999999999943" AnchorPane.topAnchor="2.0" />
       <Label fx:id="line_number" layoutX="5.0" layoutY="409.0" prefHeight="18.0" prefWidth="583.0" text="Line Number" AnchorPane.bottomAnchor="4.600000000000001" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="11.799999999999955" />
-      <MFXToggleButton layoutX="494.0" layoutY="42.0" text="Pause" AnchorPane.rightAnchor="4.400000000000006" AnchorPane.topAnchor="42.0" />
+      <MFXToggleButton layoutX="494.0" layoutY="42.0" onAction="#pause" text="Pause" AnchorPane.rightAnchor="4.400000000000006" AnchorPane.topAnchor="42.0" />
    </children>
 </AnchorPane>

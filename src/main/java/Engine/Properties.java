@@ -9,14 +9,14 @@ public class Properties {
     public static int total_links=0;
     static String proxy="";
     static String url_encoding="";
-    static String timeout="";
-    static String downloader_timeout="";
+    static String timeout="";//tested
+    static String downloader_timeout="";//tested
     static String multithreading="";
-    static String image_naming_policy="";
-    static String save_images_with_alts="";
-    static String save_images_in_folders="";
-    static String scraper_retries="";
-    static String downloader_retries="";
+    static String image_naming_policy="";//tested
+    static String save_images_with_alts="";//tested
+    static String save_images_in_folders=""; //tested
+    static String scraper_retries="";//-> has to be implemented
+    static String downloader_retries="";//tested
     public static String get(String key)
     {
      if(key.equals("proxy"))

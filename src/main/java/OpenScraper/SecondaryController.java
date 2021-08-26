@@ -70,11 +70,13 @@ public class SecondaryController implements Initializable {
             scraping_timer.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,10000,Integer.parseInt(Properties.get("timeout"))));
             Downloading_timer.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,10000,Integer.parseInt(Properties.get("dtimeout"))));
             Threading.setSelected(Properties.get("threads").equals("NO")?false:true);
+
                System.out.println("Threading ids"+Threading.isSelected());
              total_threads.setDisable(!Threading.isSelected());
 
 
              if(Threading.isSelected()) {
+                 Threading.setText("Enabled");
                  String result=(Properties.get("threads").equals("2")?"2 Threads":"N Threads");
                  if(result.equals("2 Threads"))
                  total_threads.getSelectionModel().selectFirst();
@@ -105,7 +107,7 @@ public class SecondaryController implements Initializable {
         public void apply_properties()throws Exception
         {    String thread_val="";
             if(Threading.isSelected())
-                thread_val=total_threads.getSelectionModel().getSelectedItem().toString().equals("2 Threads")?"2":"N";
+                 thread_val=total_threads.getSelectionModel().getSelectedItem().toString().equals("2 Threads")?"2":"N";
             else
                 thread_val="NO";
 
@@ -120,12 +122,14 @@ public class SecondaryController implements Initializable {
         public void threading_switch()
         {
             if(Threading.isSelected())
-            {
+            {   Threading.setText("Enabled");
                 total_threads.setDisable(false);
                 total_threads.getSelectionModel().selectFirst();
             }
-            else
+            else {
+                Threading.setText("Disabled");
                 total_threads.setDisable(true);
-        }
+            }
+            }
 
 }
