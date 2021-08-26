@@ -55,9 +55,23 @@ public class Downloader extends Task<Void> {
 
             String finallink=Properties.get("proxy")+(Properties.get("encode").equals("NO")?link: URLEncoder.encode(link, StandardCharsets.UTF_8));
             System.out.println(finallink+" is this");
+            Document doc=null;
+            int retry_count=0;
+            String resulto="";
+            while(retry_count!=Integer.parseInt(Properties.get("sretry"))) {
+               System.out.println("RETRY COUNT: "+retry_count);
+                try {
+                    doc = Jsoup.connect(Properties.get("proxy") + (Properties.get("encode").equals("NO") ? link : URLEncoder.encode(link, StandardCharsets.UTF_8))).timeout(Integer.parseInt(Properties.get("timeout"))).get();//Attempt To Scrape The Article
+                    resulto="s";
 
-            Document doc= Jsoup.connect(Properties.get("proxy")+(Properties.get("encode").equals("NO")?link: URLEncoder.encode(link, StandardCharsets.UTF_8))).timeout(Integer.parseInt(Properties.get("timeout"))).get();//Attempt To Scrape The Article
-            System.out.println("NOT HERE");
+                    if(resulto.equals("s"))
+                        break;
+                } catch (Exception e) {
+                     resulto="f";
+                     retry_count++;
+                }
+            }
+                System.out.println("NOT HERE");
             Elements images=doc.getElementsByTag("img");
             String image_array[]=new String[images.size()];
             updateMessage("Scraping "+getAFolderName(link)+" Total Images "+images.size());

@@ -32,7 +32,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Spinner fx:id="Downloading_timer" layoutX="32.0" layoutY="293.0" prefHeight="26.0" prefWidth="114.0" />
+      <Spinner fx:id="Downloading_timer" editable="true" layoutX="32.0" layoutY="293.0" prefHeight="26.0" prefWidth="114.0" />
       <Text layoutX="109.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="in ms">
          <font>
             <Font name="System Bold" size="10.0" />
@@ -68,7 +68,7 @@
          </font>
       </Text>
       <Separator layoutY="206.0" prefHeight="3.0" prefWidth="300.0" />
-      <Spinner fx:id="scraping_timer" layoutX="32.0" layoutY="356.0" prefHeight="26.0" prefWidth="114.0" />
+      <Spinner fx:id="scraping_timer" editable="true" layoutX="32.0" layoutY="356.0" prefHeight="26.0" prefWidth="114.0" />
       <Separator layoutX="300.0" layoutY="291.0" prefHeight="3.0" prefWidth="478.0" />
       <Separator layoutX="300.0" layoutY="408.0" prefHeight="3.0" prefWidth="478.0" />
       <Text layoutX="312.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retry Policy" wrappingWidth="183.25250244140625">
@@ -76,8 +76,8 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Spinner fx:id="scraper_retries" layoutX="312.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
-      <Spinner fx:id="downloader_retries" layoutX="537.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
+      <Spinner fx:id="scraper_retries" editable="true" layoutX="312.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
+      <Spinner fx:id="downloader_retries" editable="true" layoutX="537.0" layoutY="369.0" prefHeight="26.0" prefWidth="114.0" />
       <Text layoutX="312.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scraper Retries" wrappingWidth="92.85247802734375">
          <font>
             <Font name="System Bold" size="12.0" />

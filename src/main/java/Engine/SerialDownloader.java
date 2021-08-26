@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
@@ -50,7 +52,7 @@ public class SerialDownloader
                 // This will open a socket from client to server
 
 
-                URL url = new URL(link);
+                URL url = new URL(Properties.get("proxy")+(Properties.get("encode").equals("YES")? URLEncoder.encode(link, StandardCharsets.UTF_8):link));
 
 
                 // This user agent is for if the server wants real humans to visit
