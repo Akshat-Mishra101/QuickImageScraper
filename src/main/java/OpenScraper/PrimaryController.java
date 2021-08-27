@@ -4,25 +4,40 @@ import java.awt.*;
 import java.io.File;
 
 import Engine.Downloader;
+import Engine.Properties;
+import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.notifications.NotificationPos;
+import io.github.palexdev.materialfx.notifications.NotificationsManager;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
+import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Engine.DownloaderEngine;
 import Engine.FileImporter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-public class PrimaryController {
+import javafx.util.Duration;
+import org.kordamp.ikonli.javafx.FontIcon;
+
+public class PrimaryController implements Initializable {
+    @FXML
+    MFXToggleButton pause_button;
+    @FXML
+    MFXButton start_button;
     @FXML
     Label line_number;
     @FXML
@@ -75,25 +90,39 @@ public class PrimaryController {
     /**
      * Start The Process Of Downloading Stuff From THe Links
      */
-    boolean isRunning=false;
+
     @FXML
     public void start()
     {
+        lv.getItems().removeAll();
+        System.out.println("Inside The Function");
         if(new File("temp.links").exists()) {
+            System.out.println("Inside The if statement");
             Downloader de = new Downloader(lv, "temp.links");
             downloader_thread = new Thread(de);
             downloader_thread.setDaemon(true);
             pb.progressProperty().bind(de.progressProperty());
             info_label.textProperty().bind(de.messageProperty());
-            if (!isRunning) {
+            if (!downloader_thread.isAlive()) {
                 System.out.println("here");
+
                 downloader_thread.start();
-                isRunning = true;
+
+                pause_button.setDisable(false);
+                System.out.println("is not running and we started it");
+
 
             } else {
+
                 downloader_thread.stop();
-                isRunning = false;
+                System.out.println("It is running and we stopped it");
+
             }
+            de.setOnSucceeded(e->{
+
+              shownotif();
+             pause_button.setDisable(true);
+            });
         }
         else
         {
@@ -124,13 +153,18 @@ public class PrimaryController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
         stage.setResizable(false);
-        stage.getIcons().add(new Image("file:///C:/Users/joey/Images/QuickImageScraper.png"));
+        stage.getIcons().add(new Image(Properties.path_to_icon));
 
     }
 
     /**
      * Author section
      */
+    private void shownotif()
+    {
+        NotificationPos pos = NotificationPos.BOTTOM_RIGHT;
+        showNotification(pos);
+    }
     @FXML
     private void about_author()
     {
@@ -148,6 +182,44 @@ public class PrimaryController {
     private void documentation()throws Exception
     {
 
-        Desktop.getDesktop().browse(URI.create("https://github.com/Akshat-Mishra101/QuickImageScraper"));
+        Desktop.getDesktop().browse(URI.create("https://github.com/Akshat-Mishra101/QuickImageScraper#readme"));
+    }
+
+    private MFXNotification buildNotification() {
+        Region template = getRandomTemplate();
+        MFXNotification notification = new MFXNotification(template, true, true);
+        notification.setHideAfterDuration(Duration.seconds(3));
+
+        if (template instanceof SimpleMFXNotificationPane) {
+            SimpleMFXNotificationPane pane = (SimpleMFXNotificationPane) template;
+            pane.setCloseHandler(closeEvent -> notification.hideNotification());
+        } else {
+            MFXDialog dialog = (MFXDialog) template;
+            dialog.setCloseHandler(closeEvent -> notification.hideNotification());
+        }
+
+        return notification;
+    }
+
+    private Region getRandomTemplate() {
+        FontIcon icon1 = new FontIcon();
+        icon1.setIconLiteral("fas-cocktail");
+        icon1.setIconColor(Color.AQUAMARINE);
+        icon1.setIconSize(15);
+        return new SimpleMFXNotificationPane(
+                icon1,
+                "Quick Image Scraper",
+                "Alert!",
+                "Image Scraping Is Complete"
+        );
+    }
+    private void showNotification(NotificationPos pos) {
+        MFXNotification notification = buildNotification();
+        NotificationsManager.send(pos, notification);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        pause_button.setDisable(true);
     }
 }

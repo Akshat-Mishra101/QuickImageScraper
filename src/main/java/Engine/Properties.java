@@ -5,17 +5,17 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Properties {
-
+    public static String path_to_icon="file:///C:/Users/"+(System.getProperty("user.name"))+"/Documents"+"/QuickScraperEssentials/QuickImageScraper.png";
     public static int total_links=0;
-    static String proxy="";
-    static String url_encoding="";
+    static String proxy="";//tested
+    static String url_encoding="";//tested
     static String timeout="";//tested
     static String downloader_timeout="";//tested
-    static String multithreading="";
+    static String multithreading="";//almost done
     static String image_naming_policy="";//tested
     static String save_images_with_alts="";//tested
     static String save_images_in_folders=""; //tested
-    static String scraper_retries="";//-> has to be implemented
+    static String scraper_retries="";//-> tested
     static String downloader_retries="";//tested
     public static String get(String key)
     {

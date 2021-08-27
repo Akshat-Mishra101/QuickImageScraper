@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class Starter {
     public static void main(String args[])throws Exception{
-       Properties.load();
+
 
         //Properties Module has Been Tested
        //File Importing Module Works Perfectly(though it's a bit slow and might require a speed upgrade in the near future)

@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
@@ -58,6 +59,7 @@ public class Downloader extends Task<Void> {
             Document doc=null;
             int retry_count=0;
             String resulto="";
+            updateMessage("Attempting To Scrape "+finallink);
             while(retry_count!=Integer.parseInt(Properties.get("sretry"))) {
                System.out.println("RETRY COUNT: "+retry_count);
                 try {
@@ -71,7 +73,7 @@ public class Downloader extends Task<Void> {
                      retry_count++;
                 }
             }
-                System.out.println("NOT HERE");
+            updateMessage("Scraped Successfully!");
             Elements images=doc.getElementsByTag("img");
             String image_array[]=new String[images.size()];
             updateMessage("Scraping "+getAFolderName(link)+" Total Images "+images.size());
@@ -116,6 +118,7 @@ public class Downloader extends Task<Void> {
                 else
                 {
                    //collect the links in an array
+                    updateMessage("Accumulating Images For MultiThreaded Mode");
                     image_array[position++]=src;
                 }
 
@@ -124,13 +127,108 @@ public class Downloader extends Task<Void> {
 
 
             }
-           if(!Properties.get("threading").equals("NO"))
+           if(!Properties.get("threads").equals("NO"))
            {
-               if(Properties.get("threading").equals("2"))
+               if(Properties.get("threads").equals("2"))
                {
+                   updateMessage("Multi-Threaded Mode");
+                int mid=image_array.length/2;
 
 
+                Thread first_thread=new Thread(){
+                    @Override
+                    public void run()
+                    {
+                     for(int i=0;i<mid;i++)
+                     {
+                         DownloaderEngine dowloader_Engine=new DownloaderEngine();
+                     String result=dowloader_Engine.SecureDownload(image_array[i],lv);
+                         int newi=i;
+                     if(result.equals("S"))
+                     {
 
+                         Platform.runLater(()->{
+
+                             lv.getItems().add("Thread 1: Succesfully Downloaded: "+image_array[newi]);
+                         });
+
+
+                     }
+                      else
+                     {
+                         Platform.runLater(()->{
+                         lv.getItems().add("Thread 1: Failed To Download: "+image_array[newi]);
+                         });
+
+                     }
+                     }
+                    }
+                };
+
+                   Thread second_thread=new Thread(){
+                       @Override
+                       public void run()
+                       {
+                        for(int i=mid;i<image_array.length;i++)
+                        {
+                            DownloaderEngine dowloader_Engine=new DownloaderEngine();
+                            String result=dowloader_Engine.SecureDownload(image_array[i],lv);
+                            int newi=i;
+                            if(result.equals("S"))
+                            {
+                                Platform.runLater(()-> {
+                                    lv.getItems().add("Thread 2: Succesfully Downloaded: " + image_array[newi]);
+
+                                });
+                            }
+                            else
+                            {
+                                Platform.runLater(()-> {
+                                lv.getItems().add("Thread 2: Failed To Download: "+image_array[newi]);
+                                });
+
+                            }
+                        }
+                       }
+                   };
+                   first_thread.setDaemon(true);
+                   second_thread.setDaemon(true);
+                   first_thread.start();
+                   second_thread.start();
+               //
+                   while(first_thread.isAlive()||second_thread.isAlive())
+                   {
+                      //wait for the threads to finish
+
+                   }
+                   System.out.println("Threads Complete");
+
+               }
+               else{
+                   //n Thread Distribution
+                   //Create an Array Of Threads
+
+
+                   DownloaderEngine downloder_array[]=new DownloaderEngine[image_array.length];//Create As Many Downloder instances as the images
+                   Thread thread_array[]=new Thread[image_array.length];
+                   /**
+                    * Initiating the downloader engines and enveloping them
+                    * in threads
+                    */
+                   updateMessage("About To Download Images");
+                   for(int i=0;i<image_array.length;i++)
+                   {
+                       downloder_array[i]=new DownloaderEngine(image_array[i],lv);
+                       thread_array[i]=new Thread(downloder_array[i]);
+                       thread_array[i].start();
+
+                   }
+                  updateMessage("Downloading Images");
+                   while(EvenASingleThreadLives(thread_array))
+                   {
+                       //wait;
+                   }
+                  updateMessage("Download Complete");
                }
 
 
@@ -141,6 +239,21 @@ public class Downloader extends Task<Void> {
         updateMessage("Scraping Complete");
         return null;
     }
+
+    private boolean EvenASingleThreadLives(Thread[] thread_array) {
+
+        int count_of_falses=0;
+       for(int i=0;i<thread_array.length;i++)
+       {
+           if(!thread_array[i].isAlive())
+               count_of_falses++;
+       }
+      if(count_of_falses==thread_array.length)
+        return false;
+      else
+          return true;
+    }
+
     private static String getAFolderName(String s)
     {
         boolean result=Properties.get("image_saving").equals("YES")?true:false;

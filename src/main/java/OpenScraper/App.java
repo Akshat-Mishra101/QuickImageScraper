@@ -1,5 +1,6 @@
 package OpenScraper;
 
+import Engine.Properties;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,9 +24,11 @@ public class App extends Application {
         this.stage=stage;
         this.stage.setTitle("Quick Image Scraper");
         this.stage.centerOnScreen();
+        this.stage.setWidth(1200);
+        this.stage.setHeight(675);
         this.stage.setMinWidth(500);
         this.stage.setMinHeight(400);
-        this.stage.getIcons().add(new Image("file:///C:/Users/joey/Images/QuickImageScraper.png"));
+        this.stage.getIcons().add(new Image(Properties.path_to_icon));//
         this.stage.setScene(scene);
         this.stage.show();
     }
