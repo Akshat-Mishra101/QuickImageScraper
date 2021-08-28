@@ -28,7 +28,7 @@ public class App extends Application {
         this.stage.setHeight(675);
         this.stage.setMinWidth(500);
         this.stage.setMinHeight(400);
-        this.stage.getIcons().add(new Image(Properties.path_to_icon));//
+        this.stage.getIcons().add(new Image("Images/qis.png"));//
         this.stage.setScene(scene);
         this.stage.show();
     }

@@ -46,10 +46,10 @@ public class Downloader extends Task<Void> {
         int current_link_number=0;
         while(sc.hasNext())
         {
-            updateProgress(current_link_number++,Properties.total_links);//Updates The Progress Bar
-
+            updateProgress((current_link_number++/Properties.total_links)*100,100);//Updates The Progress Bar
+System.out.println((current_link_number++/Properties.total_links)*100+" AND "+Properties.total_links);
             String link=sc.nextLine();
-            System.out.println("even here");
+           
 
 
             //Wrap This Document Object Around A Retry Mechanism, which retries as many times as defined in our configuration file
@@ -61,7 +61,7 @@ public class Downloader extends Task<Void> {
             String resulto="";
             updateMessage("Attempting To Scrape "+finallink);
             while(retry_count!=Integer.parseInt(Properties.get("sretry"))) {
-               System.out.println("RETRY COUNT: "+retry_count);
+              
                 try {
                     doc = Jsoup.connect(Properties.get("proxy") + (Properties.get("encode").equals("NO") ? link : URLEncoder.encode(link, StandardCharsets.UTF_8))).timeout(Integer.parseInt(Properties.get("timeout"))).get();//Attempt To Scrape The Article
                     resulto="s";

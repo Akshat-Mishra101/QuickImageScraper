@@ -50,12 +50,25 @@ public class PrimaryController implements Initializable {
     /**
      * Load The file Containing the Set
      * of Links to be scraped as Images
+     * 
      */
     @FXML
     public void updateLineNumber()
     {
         line_number.setText("Line :"+lv.getFocusModel().getFocusedIndex());
     }
+    @FXML
+    public void stop_thread()
+    {
+    if(downloader_thread!=null)
+    {    downloader_thread.stop();
+         start_button.setDisable(false);
+         info_label.setText("Task Cancelled");
+    }
+    }
+    
+    
+    
     @FXML
     public void OpenFile()throws Exception
     {   //delete last Temporary File
@@ -66,6 +79,7 @@ public class PrimaryController implements Initializable {
         //Open A File Chooser To Select Files
         FileChooser fc=new FileChooser();
         List<File> list_of_files=fc.showOpenMultipleDialog(lv.getScene().getWindow());
+        if(list_of_files!=null){
         Iterator file_iterator=list_of_files.iterator();
         String paths="";
         while(file_iterator.hasNext())
@@ -82,7 +96,8 @@ public class PrimaryController implements Initializable {
 
         file_worker.setDaemon(true);
         file_worker.start();
-
+        }
+        
 
 
     }
@@ -105,7 +120,7 @@ public class PrimaryController implements Initializable {
             info_label.textProperty().bind(de.messageProperty());
             if (!downloader_thread.isAlive()) {
                 System.out.println("here");
-
+                start_button.setDisable(true);
                 downloader_thread.start();
 
                 pause_button.setDisable(false);
@@ -119,9 +134,10 @@ public class PrimaryController implements Initializable {
 
             }
             de.setOnSucceeded(e->{
-
+              start_button.setDisable(false);
+              pause_button.setDisable(true);
               shownotif();
-             pause_button.setDisable(true);
+             
             });
         }
         else
@@ -172,7 +188,8 @@ public class PrimaryController implements Initializable {
         Alert al=new Alert(Alert.AlertType.INFORMATION, "",ButtonType.OK);
         al.setHeaderText("About The Author");
         al.setContentText("Made By Akshat Mishra");
-
+        Stage stage = (Stage) al.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("Images/qis.png")); // To add an icon
         al.showAndWait();
     }
     /**

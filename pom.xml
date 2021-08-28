@@ -106,6 +106,16 @@
                 </executions>
             </plugin>
             <!---->
+
+
+            <!---->
+           
+
+
+
+
+        <!---->
+        
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
@@ -130,6 +140,7 @@
                 </executions>
 
             </plugin>
+                     
         </plugins>
     </build>
     <name>OpenScraper</name>

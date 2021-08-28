@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Properties {
-    public static String path_to_icon="file:///C:/Users/"+(System.getProperty("user.name"))+"/Documents"+"/QuickScraperEssentials/QuickImageScraper.png";
+    public static String path_to_icon="Images/qis.png";
     public static int total_links=0;
     static String proxy="";//tested
     static String url_encoding="";//tested
