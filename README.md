@@ -25,9 +25,7 @@ Using the QuickImageScraper is quite simple and straightforward, i've broken it 
 
 Create a simple text file and paste the liks of the web pages you want to scrape, seperated by line breaks.
 Eg:
-   <br/> https://www.octoparse.com/blog/9-free-web-scrapers-that-you-cannot-miss <br/>
-    
-         https://www.techradar.com/in/deals/oneplus-9-gets-a-limited-time-deal-on-amazon-now-available-for-rs-45999
+   &nbsp;https://www.octoparse.com/blog/9-free-web-scrapers-that-you-cannot-miss&nbsp;https://www.techradar.com/in/deals/oneplus-9-gets-a-limited-time-deal-on-amazon-now-available-for-rs-45999
     
 ## Step 2: Open The Text File From The Quick Image Scraper by clicking on the open button, and locating the file.
 
